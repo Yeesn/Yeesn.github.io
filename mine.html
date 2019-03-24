@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>扫雷</title>
+	
+</head>
+<body>
+	<canvas id="canvas" width="800" height="500"></canvas>
+</body>
+
+<script>
+	const nodes = 8;
+	const BLOCK_WIDTH = 50;
+	const BLOCK_HEIGHT = 50;
+	var headPointX = 50;
+	var headPointY = 50;
+	const maxmines = 10;
+	var mines = new Array();
+	var marks = new Array();
+	var safes = new Array();
+
+	window.onload = function(){
+		init();
+		creatMine();
+		document.onkeydown = keyDown;
+		initTimer = setInterval(init,50);
+	};
+
+	function init(){
+		var canvas=document.getElementById("canvas");
+		var cxt=canvas.getContext('2d');
+		cxt.fillStyle="grey";
+		// cxt.fillRect(10,10,BLOCK_WIDTH,BLOCK_HEIGHT);
+		for (var i = nodes - 1; i >= 0; i--) {
+			for (var j = nodes - 1; j >= 0; j--) {
+				var x = 50+51*i;
+				var y = 50+51*j;
+				cxt.fillRect(x,y,BLOCK_WIDTH,BLOCK_HEIGHT);
+			}
+		}
+		flag();
+		dig();
+		if (!ismarked(headPointX,headPointY)&&!issafe(headPointX,headPointY)) {
+			focus(headPointX,headPointY,'blue');
+		}else if (ismarked(headPointX,headPointY)) {
+			focus(headPointX,headPointY,'purple');
+		}else {
+			focus(headPointX,headPointY,'green');
+		}
+		if (marks.length+safes.length == nodes*nodes) {
+			pass();
+		}
+	}
+
+	function keyDown(event){
+		if (event.keyCode == "87"&&headPointY>50) {
+            //按下W键
+            headPointY -= 51;
+        } else if (event.keyCode == "68"&&headPointX<50+7*51) {
+            //按下D键
+            headPointX += 51;
+        } else if (event.keyCode == "83"&&headPointY<50+7*51) {
+            //按下S键
+            headPointY += 51;
+        } else if (event.keyCode == "65"&&headPointX>50) {
+            //按下A键
+            headPointX -= 51;
+        } else if (event.keyCode == "77") {
+        	//按下M键
+        	creatMark(headPointX,headPointY);
+        } else if ((event.keyCode == "32")||(event.keyCode == "13")) {
+        	//按下空格键
+        	creatSafe(headPointX,headPointY);
+        }
+        refresh();
+	}
+
+	function mine(x,y){
+		this.x = x;
+		this.y = y;
+	}
+
+	function mark(x,y){
+		this.x = x;
+		this.y = y;
+	}
+
+	function safe(x,y){
+		this.x = x;
+		this.y = y;
+	}
+
+	function creatMark(x,y){
+		var canvas=document.getElementById("canvas");
+		var cxt=canvas.getContext('2d');
+		cxt.fillStyle="red";
+		cxt.fillRect(x,y,50,50);
+		var newMark = new mark(x,y);
+		marks.push(newMark);
+	}
+
+	function ismarked(x,y){
+		for (var i = marks.length - 1; i >= 0; i--) {
+			if (x == marks[i].x&&y == marks[i].y) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function creatMine(){
+		for (var i = maxmines - 1; i >= 0; i--) {
+			var x = 50+Math.round(Math.random()*(nodes-1))*51;
+			var y = 50+Math.round(Math.random()*(nodes-1))*51;
+			var newMine = new mine(x,y);
+			mines.push(newMine);
+		}
+	}
+
+	function ismine(x,y){
+		for (var i = mines.length - 1; i >= 0; i--) {
+			if (x == mines[i].x&&y == mines[i].y) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function displaymines(){
+		var canvas=document.getElementById("canvas");
+		var cxt=canvas.getContext('2d');
+		cxt.fillStyle="orange";
+		for (var i = mines.length - 1; i >= 0; i--) {
+			cxt.fillRect(mines[i].x,mines[i].y,50,50);
+		}
+	}
+
+	function focus(x,y,color){
+		var canvas=document.getElementById("canvas");
+		var cxt=canvas.getContext('2d');
+		cxt.fillStyle=color;
+		cxt.fillRect(x,y,50,50);
+	}
+
+	function flag(){
+		var canvas=document.getElementById("canvas");
+		var cxt=canvas.getContext('2d');
+		cxt.fillStyle="red";
+		for (var i = marks.length - 1; i >= 0; i--) {
+			cxt.fillRect(marks[i].x,marks[i].y,50,50);
+		}
+	}
+
+	function dig(){
+		var canvas=document.getElementById("canvas");
+		var cxt=canvas.getContext('2d');
+		cxt.font="30px Arial"
+		for (var i = safes.length - 1; i >= 0; i--) {
+			cxt.fillStyle="brown";
+			cxt.fillRect(safes[i].x,safes[i].y,50,50);
+			cxt.fillStyle="orange";
+			switch(num(safes[i].x,safes[i].y)){
+				case 0:
+					break;
+				case 1:
+					cxt.fillText("1",safes[i].x+15,safes[i].y+40);
+					break;
+				case 2:
+					cxt.fillText("2",safes[i].x+15,safes[i].y+40);
+					break;
+				case 3:
+					cxt.fillText("3",safes[i].x+15,safes[i].y+40);
+					break;
+				case 4:
+					cxt.fillText("4",safes[i].x+15,safes[i].y+40);
+					break;
+				case 5:
+					cxt.fillText("5",safes[i].x+15,safes[i].y+40);
+					break;
+				case 6:
+					cxt.fillText("6",safes[i].x+15,safes[i].y+40);
+					break;
+				case 7:
+					cxt.fillText("7",safes[i].x+15,safes[i].y+40);
+					break;
+				case 8:
+					cxt.fillText("8",safes[i].x+15,safes[i].y+40);
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	function creatSafe(x,y){
+		if(!ismine(x,y)){
+			if (num(x,y) == 0) {
+				if (x<50+7*51) {
+					creatSafe(x+51,y);
+					//不向左
+				}
+				if (y<50+7*51) {
+					creatSafe(x,y+51);
+					//不向上
+				}
+			}
+			var newSafe = new safe(x,y);
+			if (!issafe(x,y)) {
+				safes.push(newSafe);
+			}
+		}else{
+			end();
+		}
+
+	}
+
+
+	function issafe(x,y){
+		for (var i = safes.length - 1; i >= 0; i--) {
+			if (x == safes[i].x&&y == safes[i].y) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function num(x,y){
+		var count = 0;
+		if (ismine(x,y-51)) {
+			count++;
+		}
+		if (ismine(x+51,y-51)) {
+			count++;
+		}
+		if (ismine(x+51,y)) {
+			count++;
+		}
+		if (ismine(x+51,y+51)) {
+			count++;
+		}
+		if (ismine(x,y+51)) {
+			count++;
+		}
+		if (ismine(x-51,y+51)) {
+			count++;
+		}
+		if (ismine(x-51,y)) {
+			count++;
+		}
+		if (ismine(x-51,y-51)) {
+			count++;
+		}
+		return count;
+	}
+
+	function end(){
+		clearInterval(initTimer);
+		displaymines();
+		alert("游戏结束");
+	}
+
+	function pass(){
+		clearInterval(initTimer);
+		alert("恭喜通关！");
+	}
+</script>
+</html>
+
