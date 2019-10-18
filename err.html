@@ -1,0 +1,323 @@
+//001
+#include <iostream>
+using namespace std;
+ 
+int main() {
+    // insert code here...
+    int i = 1;
+    cout << "欢迎" << endl;
+    cout << 'a' << endl;
+    cout << "i=" << i << end1;
+    cout << '\n';
+    return 0;
+}
+ 
+ 
+//002
+#include <iostream>
+#include <climits>
+#include <cfloat>
+using namespace std;
+ 
+int main()
+{
+    int iA;
+    short sB;
+    long lK;
+    float fC;
+    double dj;
+    long double kk;
+    cout << "i:(" << INT_MIN << "," << INT_MAX << ")" << endl;
+    cout << "j:(" << SHRT_MIN << "," << SHRT_MAX << ")" << endl;
+    cout << "k:(" << L0NG_MIN << "," << LONG_MAX << ")" << endl;
+    cout << "ii:(" << FLT_MIN << "," << FLT_MAX << ")" << endl;
+    cout << "jj:(" << DBL_MIN << "," << DBL_MAX << ")" << endl;
+    cout << "kk:(" << LDBL_MIN << "," << LONG_MAX << ") << endl;
+    return 0;
+}
+ 
+ 
+//003
+#include <iostream.h>
+using namespace std;
+ 
+int main()
+{
+	int iNumberA = 3;
+	int iNumberB = 5;
+ 
+	cout << "iNumberA = " << iNumberA << endl;
+	cout << "iNumberB = " << iNumberB << endl;
+ 
+	cout << "double所占的字节数：" << sizeof(double) << endl;
+	cout << "long double所占的字节数：" << sizeof(longdouble) << endl;
+	return 0;
+}
+ 
+ 
+//004 交换变量
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+	int iA = 5;
+	int iB = 8;
+	int iTemp; //iTemp 起一个缓冲性作用，用于临时放置交换变量的其中一方
+ 
+	cout << "交换前的值：iA = " << iA << " iB = " << iB << endl;
+ 
+	iTemp = iA;
+	iA = iB
+	iB = iTemp;
+ 
+	cout << "交换后的值：iA = " << iA << " iB = " << iB << endl;
+ 
+	return 0;
+}
+ 
+ 
+//005 交换变量
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+	int iA = 5;
+	float iB = 8.0001;
+	int iSum; //iTemp 起一个缓冲性作用，用于临时放置交换变量的其中一方
+ 
+	iSum = iA + iB;
+ 
+	cout << "iSum = " << iSum << endl; //隐式类型转换
+	cout << "iA + iB = " << iA + iB << endl； //13.0001 6位
+ 
+	return 0;
+}
+ 
+ 
+//006
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+	int iPoolVolume = 0;
+	int iCount = 3;
+ 
+	while (iCount != 0)
+	{
+		cin >> iPoolVolume;
+		if (iPoolVolume > 100)
+		{
+			cout << "泳池水已满，停止加水或者加入另一个游泳池" <<endl;
+		} 
+		else
+		{
+			cout << "可继续加水" << endl;
+		}
+		iCount--;
+	  } 
+	
+	  return 0;
+  }
+}
+ 
+ 
+//007 显式类型转换
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+	int iNum = 2;
+	float fNum = 3.154;
+ 
+	iNum = (int)fNum;
+	cout << "显式类型转换，赋值后的iNum值为：" << iNum << endl;
+}
+ 
+ 
+//008 单片机应用
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+	int iNumA = 10;
+	int iNumB = 2;
+	int iNumC = 0;
+ 
+	iNumC = iNumA & iNumB;
+	cout << "iNumA & iNumB 的结果是：" << iNumC << endl;
+	iNumC = iNumA | iNumB;
+	cout << "iNumA | iNumB 的结果是：" << iNumC << endl;
+	iNumC = iNumA ^ iNumB;
+	cout << "iNumA ^ iNumB 的结果是：" << iNumC << endl;
+	iNumC = ~iNumA;
+	cout << "~iNumA 的结果是：" << ~iNumC << endl;
+	iNumC = iNumA << 1;
+	cout << "iNumA << 1 的结果是：" << iNumC << endl;
+	iNumC = iNumA >> 1;
+	cout << "iNumA >> 1 的结果是：" << iNumC << endl;
+	return 0;
+}
+ 
+ 
+ 
+//0011 取余数
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+	int iAppleNumber = 60;
+	int iPeopleNumber = 7;
+	int iPeopleRemainNumber = 0;
+ 
+	if (iPeopleNumber == 0)
+	{
+		iPeopleRemainNumber = iAppleNumber % iPeopleNumber;
+		cout << "剩余的苹果数是：" << iPeopleRemainNumber << endl;
+	} 
+	else
+	{
+		cout << "除数不能为0" << endl;
+	}
+ 
+	return 0;
+}
+ 
+ 
+ 
+//013 称水果
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+	float fWeight = 0;
+	int iWeight = 0;
+ 
+	cout << "请输入水果的质量：" << endl;
+	cin >> fWeight;
+	float fWeightDecimal = fWeight - (int)fWeight;
+	if (fWeightDecimal > 0.5)
+	{
+		iWeight = (int)(fWeight - fWeightDecimal + 1);
+	} 
+	else
+	{
+		iWeight = (int)(fWeight - fWeightDecimal);
+	}
+	cout << "称的水果质量是：" << iWeight << endl;
+ 
+	return 0;
+}
+ 
+ 
+//014 简单算术
+#include <iostream>
+#include "Sales_item.h"
+using namespace std;
+ 
+//自定义函数，给优先级人为返回序号，方便后面的排序
+int level(Char ch)
+{
+	switch (ch)
+	{
+	case '!':
+		return 2;
+		break;
+	case '*':
+		return 3;
+		break;
+	case '/':
+		return 3;
+		break;
+	case '%':
+		return 3;
+		break;
+	case '+':
+		return 4;
+		break;
+	case '-':
+		return 4;
+		break;
+	case '=':
+		return 5;
+		break;
+	default:
+		return -1;
+		break;
+	}
+}
+ 
+int main()
+{
+	char symbol[3];
+	int value[3];
+	cout << "从!、*、/、%、+、-、= 运算符中选择 3 个参与算术运算" << endl;
+	cin >> symbol[0] >> symbol[1] >> symbol[2];
+ 
+	value[0] = level(symbol[0]);
+	value[1] = level(symbol[1]);
+	value[2] = level(symbol[2]);
+ 
+	if ((value[0] = -1) || (value[1] = -1) || (value[2] = -1))
+	{
+		cout << "库中没有输入的运算符" << endl;
+	} 
+	else
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = i ; j < 3; j++)
+			{
+				if (value[i] > value[j])
+				{
+					char temp;
+					temp = symbol[i];
+					symbol[i] = symbol[j];
+					symbol[j] = temp;
+				}
+			}
+		}
+		cout << "依次进入运算的顺序为：" << endl;
+		for (int k = 0; k < 3; k++)
+		{
+			cout << symbol[k] << endl;
+		}
+ 
+	}
+	return 0;
+}
+ 
+ 
+//016 计算年份是否为闰年
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+	int year = 0;
+	cin >> year;
+	if ( (year % 400) = 0 )
+	{
+		cout << "输入的年数为闰年" << endl;
+		return 0;
+	} 
+	else if ( (year % 4) = 0 && (year % 100) != 0)
+	{
+		cout << "输入的年数为闰年" << endl;
+		return 0;
+	}
+	cout << "输入的年数不为闰年" << endl;
+	return 0;
+}
+ 
+ 
+//
+————————————————
+版权声明：本文为CSDN博主「fizzwang」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/CV2017/article/details/82597666
