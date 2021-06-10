@@ -1,0 +1,121 @@
+.main .header{
+    text-align: center;
+    margin: 20px auto;
+}
+
+.main .gameBox table{
+    border-spacing: 1px;
+    background-color: #703f03;/*线条颜色*/
+    text-align: center;
+    margin: 20px auto;
+}
+
+.main .gameBox table td.mine {
+    /* 游戏结束时显示 */
+    border: none;
+    background: url(./../img/mine.png) no-repeat;
+    background-size: 90% 90%;
+    background-color: #e9e6e6;
+    background-position: 0px 2px;
+}
+   
+.main .gameBox table td.targetMine {
+    /* 游戏结束时显示，触发雷的单元格 */
+    border: none;
+    background: url(./../img/mine.png) no-repeat;
+    background-size: 90% 90%;
+    background-color: #c40707;/*踩到的雷地块颜色*/
+    background-position: 0px 2px;
+}
+
+.main .gameBox table td.targetFlag {
+    /* 右键标记方格时显示 */
+    background: url(./../img/flag.png) no-repeat;
+    background-size: 90% 90%;
+    background-position: 2px 2px;
+    background-color: #c5b4b4;/*标记块颜色*/
+}
+
+.main .gameBox table td.over {
+    /* 游戏结束时显示 */
+    border: none;
+    background-size: 90% 90%;
+    background-color: #e9e6e6;/**/
+    background-position: 2px 0;
+}
+
+.main .gameBox table td{
+    /*单元格初始样式*/
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    border: 2px solid;
+    border-color: #eee #ccc #ccc #eee;/*边界颜色*/
+    background-color: #c5b4b4;/*地块颜色*/
+    font-size: 2px;
+    font-weight: 800;
+}
+
+.gameBox table td.zero,
+.gameBox table td.one,
+.gameBox table td.two,
+.gameBox table td.three,
+.gameBox table td.four,
+.gameBox table td.five,
+.gameBox table td.six,
+.gameBox table td.seven,
+.gameBox table td.eight,
+.gameBox table td.nine{
+    border: none;
+    background-color: rgb(211, 200, 200);
+    font-size: medium;
+}
+
+.gameBox table td.one {
+    color: blue;
+}
+
+.gameBox table td.two {
+    color: rgb(5, 93, 5);
+}
+    
+.gameBox table td.three {
+    color: #008c8c;
+}
+
+.data span{
+    text-align: center;
+    height:50px;line-height:50px;
+    color: rgb(223, 18, 18);
+}
+
+.main .data{
+    text-align: center;
+    font-size: 30px;
+    height:50px;line-height:50px;
+}
+
+.btn{
+    background-color: #6cbec9;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+.btn:hover{
+    /*鼠标移到按钮上时颜色*/
+    background-color: #ccc;
+}
+
+
+img{
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    vertical-align: top;
+}
+
